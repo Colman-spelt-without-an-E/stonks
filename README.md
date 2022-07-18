@@ -26,4 +26,5 @@ For this part, the daily closing prices of Google, Amazon, Microsoft, and Apple 
   <img src="graphs/aapl_acf.png" width=49% height=49%>
 </p>
 
-We see that correlation is weaker as the lag horizon increases. More specifically, ACF drops below statistical significance (95% confidence) at around lag $l=10$ for all companies. This is a good indication that an AutoRegressive Integrated Moving Average (ARIMA) model should be used for forecasting. But... we shall start slow, with an AutoRegressive (AR) model first. 
+We see that correlation is weaker as the lag horizon increases. More specifically, ACF drops below statistical significance (95% confidence) at around lag $l=10$ for all companies. 
+<!--- This is a good indication that an AutoRegressive Integrated Moving Average (ARIMA) model should be used for forecasting. But... we shall start slow, with an AutoRegressive (AR) model first. --->
