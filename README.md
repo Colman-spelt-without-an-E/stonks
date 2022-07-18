@@ -31,10 +31,7 @@ We see that correlation is weaker as the lag horizon increases. More specificall
 We now plot the partial autocorrelation function (PACF) against lag for each corporation with a 95% confidence interval. 
 
 <p align="center">
-  <img src="graphs/goog_pacf.png" width=49% height=49%>
-  <img src="graphs/amzn_pacf.png" width=49% height=49%>
-  <img src="graphs/msft_pacf.png" width=49% height=49%>
-  <img src="graphs/aapl_pacf.png" width=49% height=49%>
+
 </p>
 
 For all corporations, only the PACF for lag $l=1$ is statistically significant whereas the PACFs for lag $l>1$ are nearly statistically insignificant. This is a good indication that AR models of order 1 are suitable for forecast. 
