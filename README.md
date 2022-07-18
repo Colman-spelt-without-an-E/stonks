@@ -15,4 +15,4 @@ For this part, the daily closing prices of Google, Amazon, Microsoft, and Apple 
 ![goog_acf]("../time series analysis/goog_acf.png")
 ![amzn_acf](https://user-images.githubusercontent.com/106886906/179564398-ca021617-538e-478a-8dcb-c54cbdf2636d.png)
 ![msft_acf](https://user-images.githubusercontent.com/106886906/179564401-91d7b011-1431-483e-9d14-cf9910baf780.png)
-![aapl_acf](https://user-images.githubusercontent.com/106886906/179564411-b65c0cad-1fd9-4554-b892-941c198bbb63.png)
+![aapl_acf](aapl_acf.png)
