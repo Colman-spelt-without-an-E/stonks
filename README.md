@@ -40,8 +40,10 @@ We now plot the partial autocorrelation function (PACF) against lag for each cor
 For all corporations, only the PACF for lag $l=1$ is statistically significant whereas the PACFs for lag $l>1$ are nearly statistically insignificant. This is a good indication that AR models of order 1 are suitable for forecast. However, as we are starting with an intuitive trading strategy, the mean reversion strategy, we shall explore the moving average (MA) model first, since it ties in much better with mean reversion strategy. 
 
 ## Mean reversion
+
 ***Mean reversion*** is a simple and intuitive trading strategy. The mean, and this can *mean* a lot of things (pun intended), of previous closing prices is computed and we compare it with the current price. Is the current price *lower* than the mean? Well maybe you should buy some shares before the price jumps back up. Is the current price *higher* than the mean? Well maybe you should sell some shares before the price falls. 
 
+### Moving average (MA) model
 There are two questions keen readers might pick up on after reading the description of MA strategy:
 1. Mean is simply the mean, the average. How are there different types of mean?
 2. Buy low, sell high; I get it, and we are using the mean as the standard for what is low and high. But what if the price never returns to the mean?
@@ -73,12 +75,14 @@ We see that exponential moving averages tend to be smoother and simple moving av
 
 The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. This is explored more in [more on moving average using mean reversion strategy](MA_MR.md). 
 
-The graphs above, albeit pretty, paint a very different picture from reality though. Even though profits are made using mean reversion strategy with a moving average, things fall apart quickly if we allow the machine to run for another 50 days. 
+The graphs above, albeit pretty, paint a very different picture from reality though. Even though profits are made using mean reversion strategy with a moving average, things fall apart quickly if we allow the machine to run for another 50 days. Here, only the result using the EMA model are shown, but SMA model shows a similar result. 
 
 <p align="center">
   <img src="graphs/ma_mr_exp_goog_N101.png">
 </p>
 
-Here, only the result using the EMA model are shown, but SMA model shows a similar result. 
+*It's... pretty terrible to say the least*. Recall the pitfall of mean reversion, that it exploits price volatility and **expects** the price to return to its mean, so when we have a clear general trend, mean reversion does not perform well. Think of it this way: moving average lags behind the real trend. This model is susceptible to when mean is not constant. So, ironically, it is susceptible to the *moving average* of the real share price. Ha ha. 
 
-Mean reversion with a moving average is... not good. At least not good for stocks like Google with a clear trend. Recall the pitfall of mean reversion. 
+Instead of an MA model, let's try an...
+
+### Autoregressive (AR) model
