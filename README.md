@@ -61,14 +61,24 @@ today is lower than the mean, then 1 share is bought. Likewise, if the closing p
 
 Below is the result of SMA of different orders in application. Total net worth is the sum of the capital gain and shareholder gain value. 
 <p align="center">
-  <img src="graphs/ma_mr_simple_goog_N50.png">
+  <img src="graphs/ma_mr_simple_goog_N51.png">
 </p>
 
 Similarly, below is the result of EMA of different degrees of weighting decrease in application. 
 <p align="center">
-  <img src="graphs/ma_mr_exp_goog_N50.png">
+  <img src="graphs/ma_mr_exp_goog_N51.png">
 </p>
 
 We see that exponential moving averages tend to be smoother and simple moving averages tend to be more jagged. This, however, does not play a huge part in trading, as seen from the similar-ish results displayed above. 
 
-The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. Please see [ma_mr](MA_MR.md)
+The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. This is explored more in [more on moving average using mean reversion strategy](MA_MR.md). 
+
+The graphs above, albeit pretty, paint a very different picture from reality though. Even though profits are made using mean reversion strategy with a moving average, things fall apart quickly if we allow the machine to run for another 50 days. 
+
+<p align="center">
+  <img src="graphs/ma_mr_exp_goog_N101.png">
+</p>
+
+Here, only the result using the EMA model are shown, but SMA model shows a similar result. 
+
+Mean reversion with a moving average is... not good. At least not good for stocks like Google with a clear trend. Recall the pitfall of mean reversion. 
