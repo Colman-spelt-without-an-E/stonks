@@ -59,7 +59,7 @@ Without going deeply into the maths *(as much as I want to)*, EMA places exponen
 We run a simulation to get an insight on how MA works with mean reversion strategy. We apply our model called MA_MR_naive onto the share prices of Google starting from 01/07/2019. More specifically, we start trading on 16/07/2019, but we give our MA models some time to "buffer" since past data are required to compute the moving average. We perform 51 trades, which is equivalent to saying we trade for 51 days. In each day, the simple/exponential mean is computed. If the closing price 
 today is lower than the mean, then 1 share is bought. Likewise, if the closing price today is higher than the mean, then 1 share is sold. It is assumed that we have enough capital (so we can always buy shares) and enough shares (so we can always sell shares) at the start. 
 
-Below is the result of SMA of different orders in application. Total net worth is the sum of the capital and shareholder value. 
+Below is the result of SMA of different orders in application. Total net worth is the sum of the capital gain and shareholder gain value. 
 <p align="center">
   <img src="graphs/ma_mr_simple_goog_N50.png">
 </p>
@@ -69,4 +69,6 @@ Similarly, below is the result of EMA of different degrees of weighting decrease
   <img src="graphs/ma_mr_exp_goog_N50.png">
 </p>
 
-The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. 
+We see that exponential moving averages tend to be smoother and simple moving averages tend to be more jagged. This, however, does not play a huge part in trading, as seen from the similar-ish results displayed above. 
+
+The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. Please see [ma_mr](MA_MR.md)
