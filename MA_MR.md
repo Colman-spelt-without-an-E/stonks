@@ -13,4 +13,4 @@ Let's see if we can do better. What about a linear function? The figure below sh
   <img src="graphs/ma_mr_exp_id_goog_N101.png" width=40% height=40%>
 </p>
 
-This may look like a huge improvement from the naive buy function, but we can always scale the buy function by a linear constant. 
+Tl;dr, the reason why there is a loss at the end is because moving average is delayed and cannot catch up with the trend, so there is a strong disparity between current price and moving average. See more back in the [main markdown file]. 
