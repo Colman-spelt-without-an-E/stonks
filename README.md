@@ -37,7 +37,7 @@ We now plot the partial autocorrelation function (PACF) against lag for each cor
   <img src="graphs/aapl_pacf.png" width=49% height=49%>
 </p>
 
-For all corporations, only the PACF for lag $l=1$ is statistically significant whereas the PACFs for lag $l>1$ are nearly statistically insignificant. This is a good indication that AR models of order 1 are suitable for forecast. However, as we are starting with an intuitive trading strategy, the mean reversion strategy, we shall explore the moving average (MA) model first, since it ties in much better with mean reversion strategy. 
+For all corporations, ACFs gradually decrease as lag increases, suggesting the time series is **not stationary**. For the following section, the mean reversion trading strategy is used assuming weak stationarity. We shall see the pitfall of doing so. 
 
 ## Mean reversion
 
@@ -83,6 +83,4 @@ The graphs above, albeit pretty, paint a very different picture from reality tho
 
 *It's... pretty terrible to say the least*. Recall the pitfall of mean reversion, that it exploits price volatility and **expects** the price to return to its mean, so when we have a clear general trend, mean reversion does not perform well. Think of it this way: moving average lags behind the real trend. This model is susceptible to when mean is not constant. So, ironically, it is susceptible to the *moving average* of the real share price. Ha ha. 
 
-Instead of an MA model, let's try an...
-
-### Autoregressive (AR) model
+Let's try differencing the time series. 
