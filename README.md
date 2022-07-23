@@ -37,7 +37,7 @@ We now plot the partial autocorrelation function (PACF) against lag for each cor
   <img src="graphs/aapl_pacf.png" width=49% height=49%>
 </p>
 
-For all corporations, ACFs gradually decrease as lag increases, suggesting the time series is **not stationary**. For the following section, the mean reversion trading strategy is used assuming weak stationarity. We shall see the pitfall of doing so. 
+For all corporations, ACFs gradually decrease as lag increases, suggesting the time series is **not stationary**. For the following section, the mean reversion trading strategy is used assuming weak stationarity. We shall see the problem in that assumption later and an solution presents itself. 
 
 ## Mean reversion
 
@@ -58,7 +58,7 @@ Simple MA models computes the unweighted average within a constant timeframe cal
 
 Without going deeply into the maths *(as much as I want to)*, EMA places exponentially decreasing weights on previous closing prices. So, the closing price of each day into the past gradually gets applied less weight, meaning the closing price a few years ago will have very minimal influence on computing our mean. A constant is required to decide how quickly the weights of older closing prices decrease, and we call it the degree of weighting decrease. An exponential moving average model of degree of weighting decrease 0.5 is denoted by EMA(0.5). The degree of weighting decrease ranges from 0 to 1. The closer it is to 1, the quicker the weights of older closing prices decrease. 
 
-We run a simulation to get an insight on how MA works with mean reversion strategy. We apply our model called MA_MR_naive onto the share prices of Google starting from 01/07/2019. More specifically, we start trading on 16/07/2019, but we give our MA models some time to "buffer" since past data are required to compute the moving average. We perform 51 trades, which is equivalent to saying we trade for 51 days. In each day, the simple/exponential mean is computed. If the closing price 
+We run a simulation to get an insight on how MA works with mean reversion strategy. We apply our model called MA_MR_naive onto the share prices of Google starting from 01/07/2019. More specifically, we start trading on 17/07/2019, but we give our MA models some time to "buffer" since past data are required to compute the moving average. We perform 51 trades, which is equivalent to saying we trade for 51 days. In each day, the simple/exponential mean is computed. If the closing price 
 today is lower than the mean, then 1 share is bought. Likewise, if the closing price today is higher than the mean, then 1 share is sold. It is assumed that we have enough capital (so we can always buy shares) and enough shares (so we can always sell shares) at the start. 
 
 Below is the result of SMA of different orders in application. Total net worth is the sum of the capital gain and shareholder gain value. 
@@ -71,11 +71,9 @@ Similarly, below is the result of EMA of different degrees of weighting decrease
   <img src="graphs/ma_mr_exp_goog_N51.png">
 </p>
 
-We see that exponential moving averages tend to be smoother and simple moving averages tend to be more jagged. This, however, does not play a huge part in trading, as seen from the similar-ish results displayed above. 
+We see that EMAs tend to be smoother and SMAs tend to be more jagged. This, however, does not play a huge part in trading, as seen from the similar-ish results displayed above, so from now one, we shall study EMAs only. 
 
-The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. This is explored more in [more on moving average using mean reversion strategy](MA_MR.md). 
-
-The graphs above, albeit pretty, paint a very different picture from reality though. Even though profits are made using mean reversion strategy with a moving average, things fall apart quickly if we allow the machine to run for another 50 days. Here, only the result using the EMA model are shown, but SMA model shows a similar result. 
+In hindsight, the machine looks to be working fine *(there is profit!)*, but things fall apart quickly if it runs for another 50 days. 
 
 <p align="center">
   <img src="graphs/ma_mr_exp_goog_N101.png">
@@ -83,4 +81,23 @@ The graphs above, albeit pretty, paint a very different picture from reality tho
 
 *It's... pretty terrible to say the least*. Recall the pitfall of mean reversion, that it exploits price volatility and **expects** the price to return to its mean, so when we have a clear general trend, mean reversion does not perform well. Think of it this way: moving average lags behind the real trend. This model is susceptible to when mean is not constant. So, ironically, it is susceptible to the *moving average* of the real share price. Ha ha. 
 
-Let's try differencing the time series. 
+Let's look at the difference between each consecutive entry of the share price of Google, Amazon, Microsoft, and Apple as a time series. We're **differencing** the time series. 
+
+<p align="center">
+  <img src="graphs/goog_differenced_time_series.png" width=49% height=49%>
+  <img src="graphs/amzn_differenced_time_series.png" width=49% height=49%>
+  <img src="graphs/msft_differenced_time_series.png" width=49% height=49%>
+  <img src="graphs/aapl_differenced_time_series.png" width=49% height=49%>
+</p>
+
+Suddenly, the time series looks to be fluctuating around $y=0$, and the assumption that it is stationary is not too far-fetched now. This is the power of differencing the time series. 
+
+Let's once again apply EMA using the exact same strategy, but onto the differenced time series of Google share price instead. 
+
+<p align="center">
+  <img src="graphs/ma_mr_exp_sgn_goog_diff_N101.png">
+</p>
+
+Far from perfect, but much better. Let's do even better. 
+
+The naive part of this model is that we only buy/sell 1 share at a time. Depending on how close we are to the mean, we should buy/sell different amount of shares. This is explored more in [more on moving average using mean reversion strategy](MA_MR.md). 
